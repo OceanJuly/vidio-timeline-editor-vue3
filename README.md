@@ -1,18 +1,24 @@
-# Vue 3 + TypeScript + Vite
+# Vue3 音视频编辑工具
+Vue 3 + FFmpeg 实现纯前端音视频编辑
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## 特性
+- Vue 3、Vue-Router 4、Vite、TypeScript
+- Pinia 状态管理
+- Tailwind 原子css集成
+- ffmpeg、wasm 底层音视频处理集成
+- Icon组件自动导入
+- API自动注册 + vue-hooks-plus 简化API调用维护
+- 提供一个基于Vite的本地接口服务，用来提供一些简单的Mock接口
+- 暗色主题切换
 
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Type Support For `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+## 功能
+- 多轨道时间轴，支持帧缩放，时间缩放
+- 支持多种类型轨道的添加删除
+- 多功能轨道调节，支持音视频轨道内裁剪，支持轨道拖拽调整顺序、起止帧
+- 可伸缩轨道列表，灵活调整轨道列表高度
+- 可配置参数容器，轨道属性调节全部由配置文件生成
+- ffmpeg
+  - 核心API封装管理
+  - 调用队列封装，支持并发运行run
+  - gif抽帧、视频抽帧、视频裁切、音视频分离、文件下载
+  - 音频裁切、多音频合成、音频波形

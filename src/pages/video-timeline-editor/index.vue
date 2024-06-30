@@ -6,8 +6,9 @@ import ResourcesContainer from "@/pages/video-timeline-editor/components/contain
 
 <template>
   <header-container></header-container>
-  <div class="flex flex-1 overflow-hidden">
+  <div class="flex overflow-hidden">
     <ResourcesContainer />
+    <div class="flex flex-1 bg-amber-300 h-full w-full"></div>
   </div>
 </template>
 

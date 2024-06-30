@@ -1,11 +1,10 @@
 <template>
   <el-tabs tab-position="left">
-    <el-tab-pane :label="menu.title" v-for="menu in menuData" :key="menu.key">
+    <el-tab-pane v-for="menu in menuData" :key="menu.key">
       <template #label>
-        <span>
-          <el-icon><calendar /></el-icon>
-          <span>Route</span>
-        </span>
+        <div>
+          <span>{{ menu.title }}</span>
+        </div>
       </template>
     </el-tab-pane>
   </el-tabs>

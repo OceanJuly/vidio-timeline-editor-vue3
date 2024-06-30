@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="w-full h-full">
+  <div class="w-[100vw] h-[100vh]">
     <RouterView />
   </div>
 </template>

@@ -2,13 +2,12 @@ interface MenuItem {
     title: string,
     key: string,
     active?: boolean,
-    icon: string
+    icon?: string
 }
 const menuData: MenuItem[] = [
     {
         title: 'video',
-        key: 'video',
-        icon: 'VideoIcon'
+        key: 'video'
     }
 ]
 

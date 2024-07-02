@@ -5,13 +5,13 @@ export const _routes: RouteRecordRaw[] = [
         path: '/',
         redirect: '/videoTimelineEditor',
         name: 'videoTimelineEditor',
-        component: () => import('@/pages/video-timeline-editor'),
+        component: () => import('@/pages/video-timeline-editor/index.vue'),
         meta: { title: '视频编辑器' },
         children: [
             {
                 path: 'videoTimelineEditor',
                 name: 'videoTimelineEditor',
-                component: () => import('@/pages/video-timeline-editor'),
+                component: () => import('@/pages/video-timeline-editor/index.vue'),
                 meta: { title: 'component.route.videoTimelineEditor' }
 
             }

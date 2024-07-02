@@ -12,6 +12,7 @@ declare module 'vue' {
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
     HeaderContainer: typeof import('./src/components/container/HeaderContainer.vue')['default']
+    ResourcesContainer: typeof import('./src/components/container/ResourcesContainer.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

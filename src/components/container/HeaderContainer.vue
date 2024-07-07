@@ -17,5 +17,5 @@
 </template>
 
 <script setup lang="ts">
-	// import { Download } from '@element-plus/icons-vue'
+	import { Download } from '@element-plus/icons-vue'
 </script>

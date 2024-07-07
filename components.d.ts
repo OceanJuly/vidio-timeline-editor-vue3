@@ -7,14 +7,30 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AddIcon: typeof import('./src/components/icons/AddIcon.vue')['default']
+    AttrEmptyIcon: typeof import('./src/components/icons/AttrEmptyIcon.vue')['default']
+    AudioIcon: typeof import('./src/components/icons/AudioIcon.vue')['default']
+    DeleteIcon: typeof import('./src/components/icons/DeleteIcon.vue')['default']
+    EffectsIcon: typeof import('./src/components/icons/EffectsIcon.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
+    FilterIcon: typeof import('./src/components/icons/FilterIcon.vue')['default']
     HeaderContainer: typeof import('./src/components/container/HeaderContainer.vue')['default']
+    ImageIcon: typeof import('./src/components/icons/ImageIcon.vue')['default']
+    ItemList: typeof import('./src/components/ItemList.vue')['default']
     MenuList: typeof import('./src/components/MenuList.vue')['default']
+    RedoIcon: typeof import('./src/components/icons/RedoIcon.vue')['default']
     ResourcesContainer: typeof import('./src/components/container/ResourcesContainer.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SplitIcon: typeof import('./src/components/icons/SplitIcon.vue')['default']
+    SubIcon: typeof import('./src/components/icons/SubIcon.vue')['default']
+    SubList: typeof import('./src/components/SubList.vue')['default']
+    TextIcon: typeof import('./src/components/icons/TextIcon.vue')['default']
+    TransitionIcon: typeof import('./src/components/icons/TransitionIcon.vue')['default']
+    UndoIcon: typeof import('./src/components/icons/UndoIcon.vue')['default']
+    VideoIcon: typeof import('./src/components/icons/VideoIcon.vue')['default']
   }
 }

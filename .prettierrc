@@ -3,7 +3,6 @@
   "trailingComma": "none",
   "singleQuote": true,
   "semi": false,
-  "importOrder": ["<THIRD_PARTY_MODULES>", "^@/(.*)$", "^[./]"],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
   "tabWidth": 2,
@@ -13,5 +12,12 @@
   "requireConfig": false,
   "htmlWhitespaceSensitivity": "strict",
   "vueIndentScriptAndStyle": true,
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+  "importOrder": ["<THIRD_PARTY_MODULES>", "^@/(.*)$", "^[./]"],
+  "importOrderParserPlugins": [
+    "typescript",
+    "classProperties",
+    "decorators-legacy"
+  ],
+  "plugins": ["@trivago/prettier-plugin-sort-imports"]
 }

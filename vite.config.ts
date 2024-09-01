@@ -7,6 +7,8 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 
+import createViteProxyServer from './ViteUtil/VitePluginGetData/vite-plugin-get-data'
+
 const fs = require('fs')
 
 const openSSl = process.env?.npm_lifecycle_event === 'dev-ssl'
@@ -47,7 +49,8 @@ export default defineConfig({
 		}),
 		Icons({
 			autoInstall: true
-		})
+		}),
+		createViteProxyServer()
 	],
 	resolve: {
 		alias: {

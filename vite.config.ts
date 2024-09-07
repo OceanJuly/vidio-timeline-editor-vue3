@@ -7,25 +7,12 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 
-import createViteProxyServer from './ViteUtil/VitePluginGetData/vite-plugin-get-data'
-
-const fs = require('fs')
+import VitePluginMock from './ViteUtil/VitePluginMock/vite-plugin-mock'
 
 const openSSl = process.env?.npm_lifecycle_event === 'dev-ssl'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	server: {
-		host: openSSl,
-		https: openSSl && {
-			key: fs.readdirSync('ViteUtil/cert/key.pem'),
-			cert: fs.readdirSync('ViteUtil/cert/cert.pem')
-		},
-		headers: {
-			'Cross-Origin-Opener-Policy': 'same-origin',
-			'Cross-Origin-Embedder-Policy': 'require-corp'
-		}
-	},
 	plugins: [
 		vue(),
 		AutoImport({
@@ -50,7 +37,7 @@ export default defineConfig({
 		Icons({
 			autoInstall: true
 		}),
-		createViteProxyServer()
+		VitePluginMock()
 	],
 	resolve: {
 		alias: {

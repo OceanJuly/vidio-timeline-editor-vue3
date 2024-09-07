@@ -1,6 +1,8 @@
 <template>
 	<div class="w-full flex flex-col pt-2 pl-2 pr-1 mt-2">
-		<span class="mr-2 pl-2 mb-2 h-6 text-sm border-b dark:border-gray-600 border-gray-300 select-none">
+		<span
+			class="mr-2 pl-2 mb-2 h-6 text-sm border-b dark:border-gray-600 border-gray-300 select-none"
+		>
 			{{ listData.title }}
 		</span>
 		<ul class="flex flex-row flex-wrap">
@@ -11,12 +13,10 @@
 				:key="`${item.name}${item.cover}${idnex}`"
 			>
 				<template v-if="isAudio">
-					<!--					<AudioResourceItem :data="item" :type="type" />-->
-					AudioResourceItem
+					<AudioResourceItem :data="item" :type="type" />
 				</template>
 				<template v-else>
-					OtherResource
-					<!--					<OtherResource :data="item" :type="type" />-->
+					<OtherResource :data="item" :type="type" />
 				</template>
 			</li>
 		</ul>
@@ -24,9 +24,11 @@
 </template>
 
 <script setup lang="ts">
-	import { ref, computed } from 'vue'
-	// import AudioResourceItem from '@/views/Edit/components/AudioResourceItem'
-	// import OtherResource from ''@/views/Edit/components/OtherResource''
+	import { computed, ref } from 'vue'
+
+	import AudioResourceItem from '@/components/item/resourcesItem/AudioResourceItem.vue'
+	import OtherResource from '@/components/item/resourcesItem/otherResource.vue'
+
 	const props = defineProps({
 		listData: {
 			type: Object,

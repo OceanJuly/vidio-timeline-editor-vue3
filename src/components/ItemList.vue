@@ -22,9 +22,11 @@
 <script setup lang="ts">
 	import { Fold } from '@element-plus/icons-vue'
 	import { computed, ref, watch } from 'vue'
-	import SubList from '@/components/SubList.vue'
-	import { getData } from '@/api/mock'
 	import { useRequest } from 'vue-hooks-plus'
+
+	import { getData } from '@/api/mock'
+	import SubList from '@/components/SubList.vue'
+
 	const props = defineProps({
 		activeKey: {
 			type: String,
@@ -45,6 +47,7 @@
 		}
 	})
 	const { data: listData, refresh } = useRequest(() => getData(props.activeKey))
+	console.log(listData)
 	watch(
 		() => props.activeKey,
 		() => {

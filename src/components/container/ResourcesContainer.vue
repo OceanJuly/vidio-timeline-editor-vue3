@@ -8,7 +8,11 @@
 			@collapseChange="changeCollapse"
 		/>
 		<div class="absolute top-1/2 left-8" v-show="store.hideSubMenu">
-			<ElIcon :size="16" class="cursor-pointer p-2 box-content" @click="switchCollapse">
+			<ElIcon
+				:size="16"
+				class="cursor-pointer p-2 box-content"
+				@click="switchCollapse"
+			>
 				<Expand />
 			</ElIcon>
 		</div>
@@ -16,6 +20,7 @@
 </template>
 
 <script setup lang="ts">
+	import { Expand } from '@element-plus/icons-vue'
 	import { nextTick, reactive, ref } from 'vue'
 
 	import { ItemList, MenuList } from '@/components'

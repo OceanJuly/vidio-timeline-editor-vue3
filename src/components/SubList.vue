@@ -9,8 +9,8 @@
 			<li
 				class="flex flex-col mb-2 p-1.5"
 				:class="{ 'w-full': isAudio }"
-				v-for="(item, idnex) of listData.items"
-				:key="`${item.name}${item.cover}${idnex}`"
+				v-for="(item, index) of listData.items"
+				:key="`${item.name}${item.cover}${index}`"
 			>
 				<template v-if="isAudio">
 					<AudioResourceItem :data="item" :type="type" />
@@ -27,7 +27,7 @@
 	import { computed, ref } from 'vue'
 
 	import AudioResourceItem from '@/components/item/resourcesItem/AudioResourceItem.vue'
-	import OtherResource from '@/components/item/resourcesItem/otherResource.vue'
+	import OtherResource from '@/components/item/resourcesItem/OtherResource.vue'
 
 	const props = defineProps({
 		listData: {

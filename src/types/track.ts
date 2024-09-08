@@ -79,3 +79,9 @@ export interface TrackLineItem {
 	main?: boolean
 	list: TrackItem[]
 }
+
+export interface TrackControlItem {
+	title: string
+	disable: boolean
+	icon: string
+}

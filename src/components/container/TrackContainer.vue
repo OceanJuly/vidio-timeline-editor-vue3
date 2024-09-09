@@ -10,16 +10,14 @@
 			v-model:newHeight="page.trackHeight"
 		/>
 		<TrackControl v-model="store.trackScale" />
-		<!--		<TrackList />-->
+		<TrackList />
 	</div>
 </template>
 
 <script setup lang="ts">
 	import { computed, reactive } from 'vue'
 
-	import SplitLine from '@/components/SplitLine.vue'
-	// import TrackList from '@/components/TrackList.vue'
-	import TrackControl from '@/components/item/trackItem/TrackControl.vue'
+	import { SplitLine, TrackControl, TrackList } from '@/components'
 	import { usePageState } from '@/store/pageState'
 	import { useTrackState } from '@/store/trackState'
 

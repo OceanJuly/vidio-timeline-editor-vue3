@@ -11,7 +11,13 @@ import App from './App.vue'
 import router from './router'
 import './style.css'
 
+const app = createApp(App)
+
 const pinia = createPinia()
 pinia.use(installPiniaPlugin)
 
-createApp(App).use(router).use(pinia).use(installIcon).mount('#app')
+app.use(pinia)
+app.use(router)
+app.use(installIcon.install)
+
+app.mount('#app')

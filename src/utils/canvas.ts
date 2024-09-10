@@ -1,4 +1,7 @@
 import type { CanvasConfig, UserConfig } from '@/types'
+import { formatTime } from '@/utils/common.ts'
+
+const lineWidth = 0.5 // 线条宽度
 
 // 标尺中每小格代表的宽度(根据 scale 的不同实时变化)
 const getGridSize = (scale: number) => {
@@ -43,6 +46,31 @@ export const getGridPixel = (scale: number, frameCount: number) => {
 const getStep = (scale: number, frameStep: number): number => {
 	return scale > 60 ? frameStep : 10
 }
+// 转换时间格式
+const getLongText = (count: number, scale: number) => {
+	let time = count // 一个大单元格为 1 秒
+	if (scale < 30) {
+		// 一个单元格为 1 分钟
+		time *= 60
+	} else if (scale < 70) {
+		// 一个大单元格为 10 秒
+		time *= 10
+	}
+	return formatTime(time * 1000).str
+}
+const getShortText = (count: number, step: number, scale: number) => {
+	const index = count % step
+	let text = ''
+	if (scale < 70) {
+		// 一个单元格为 1 秒钟
+		return ''
+	} else {
+		// 一个单元格为 1 帧
+		text =
+			scale > 80 ? (index === 0 ? '' : `${index < 10 ? '0' : ''}${index}f`) : ''
+	}
+	return text
+}
 export const drawTimeLine = (
 	context: CanvasRenderingContext2D,
 	userConfigs: UserConfig,
@@ -84,4 +112,86 @@ export const drawTimeLine = (
 	const endValue = start + Math.ceil(width) // 终点刻度（略超出标尺宽度即可）
 
 	// todo：3. 时间轴聚焦元素
+	if (focusPosition) {
+		let fStart = focusPosition.start
+		let fCount = focusPosition.end - focusPosition.start
+		if (scale < 70) {
+			// 一个单元格 1s
+			fStart = fStart / 30
+			fCount = fCount / 30
+		}
+		if (scale < 30) {
+			// 一个单元格 6s
+			fStart = fStart / 6
+			fCount = fCount / 6
+		}
+		const focusS = fStart * gridSizeS + lineWidth - start // 选中起点坐标
+		const focusW = fCount * gridSizeS - lineWidth // 选中宽度
+		if (focusW > gridSizeS) {
+			// 小于一个小格就不提示了
+			context.fillStyle = focusColor
+			context.fillRect(focusS, 0, focusW, (height * 3) / 8)
+		}
+	}
+
+	// 4. 初始化刻度和文字画笔
+	context.beginPath()
+	context.fillStyle = textColor
+	context.strokeStyle = longColor
+
+	/**
+	 * 5. 长间隔和文字
+	 * 长间隔和短间隔需分开两次绘制，才可以完成不同颜色的设置
+	 * 分开放两个 for 循环是为了节省性能，如果集中在一个 for 里面，每次循环都会重新绘制 dom
+	 * */
+	for (
+		let value = startValueB, count = 0;
+		value < endValue;
+		value += gridSizeB, count++
+	) {
+		const x = offsetXB + count * gridSizeB + lineWidth // 防止画布1px线条模糊
+		context.moveTo(x, 0)
+		context.save()
+		context.translate(x, height * 0.4)
+		context.scale(textScale / ratio, textScale / ratio)
+		const text = getLongText(value / gridSizeB, scale)
+		const textPositionX = text.length * 5 * textScale * ratio // 文字长度的一半
+		const textPositionY = ((textSize / ratio) * textScale) / ratio / 2 // 文字高度的一半
+		context.fillText(text, textPositionX, textPositionY)
+		context.restore()
+		context.lineTo(x, (height * 10) / 16 / ratio)
+	}
+	context.stroke()
+	context.closePath()
+
+	// 6. 短间隔和文字 只在特殊方法倍数下显示文字
+	context.beginPath()
+	context.fillStyle = subTextColor
+	context.strokeStyle = shortColor
+	for (
+		let value = startValueS, count = 0;
+		value < endValue;
+		value += gridSizeS, count++
+	) {
+		const x = offsetXS + count * gridSizeS + lineWidth // 防止画布1px线条模糊
+		context.moveTo(x, 0)
+		const text = getShortText(value / gridSizeS, step, scale)
+		if (text) {
+			context.save()
+			context.translate(x, height * 0.4)
+			context.scale(textScale / ratio, textScale / ratio)
+			const textPositionX = text.length * 5 * textScale * ratio // 文字长度的一半
+			const textPositionY = ((textSize / ratio) * textScale) / ratio / 2 // 文字高度的一半
+			context.fillText(text, textPositionX, textPositionY)
+			context.restore()
+		}
+		if (value % gridSizeB !== 0) {
+			context.lineTo(x, height / 3 / ratio)
+		}
+	}
+	context.stroke()
+	context.closePath()
+
+	// 恢复ctx matrix
+	context.setTransform(1, 0, 0, 1, 0, 0)
 }

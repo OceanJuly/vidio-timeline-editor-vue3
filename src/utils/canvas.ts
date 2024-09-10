@@ -195,3 +195,21 @@ export const drawTimeLine = (
 	// 恢复ctx matrix
 	context.setTransform(1, 0, 0, 1, 0, 0)
 }
+
+// 获取选中点的帧坐标
+export const getSelectFrame = (
+	offsetX: number,
+	scale: number,
+	frameStep: number
+) => {
+	const size = getGridSize(scale)
+	if (scale < 70) {
+		// 一个单元格为 1 秒
+		offsetX *= frameStep
+	}
+	if (scale < 30) {
+		// 一个单元格为 6 秒
+		offsetX *= 6
+	}
+	return Math.floor(offsetX / size) + (scale < 70 ? 0 : 1)
+}

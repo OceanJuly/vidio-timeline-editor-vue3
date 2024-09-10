@@ -13,11 +13,19 @@
 </template>
 
 <script setup lang="ts">
-	import { computed, nextTick, onMounted, reactive, ref, toRefs } from 'vue'
+	import {
+		computed,
+		nextTick,
+		onMounted,
+		reactive,
+		ref,
+		toRefs,
+		watch
+	} from 'vue'
 
 	import { usePageState } from '@/store/pageState.ts'
 	import type { CanvasConfig, UserConfig } from '@/types'
-	import { drawTimeLine } from '@/utils/canvas.ts'
+	import { drawTimeLine, getSelectFrame } from '@/utils/canvas.ts'
 
 	const props = defineProps({
 		start: {
@@ -46,8 +54,13 @@
 			}
 		}
 	})
+	const emits = defineEmits({
+		selectFrame(val: number) {
+			return val !== null
+		}
+	})
 
-	const { isDark } = toRefs(usePageState())
+	const { isDark, hideSubMenu } = toRefs(usePageState())
 
 	/* canvas wrap */
 	const canvasContainer = ref()
@@ -55,6 +68,7 @@
 	/* canvas style */
 	const timeLine = ref()
 	let canvasContext = {} as CanvasRenderingContext2D
+
 	const canvasConfigs = computed(() => ({
 		bgColor: isDark.value ? '#374151' : '#E5E7EB', // 背景颜色
 		ratio: window.devicePixelRatio || 1, // 设备像素比
@@ -71,6 +85,7 @@
 		subTextColor: isDark.value ? '#9CA3AF' : '#6B7280', // 小文字颜色
 		focusColor: isDark.value ? '#6D28D9' : '#C4B5FD' // 选中元素区间
 	}))
+
 	const canvasStyle = computed(() => ({
 		width: `${canvasAttr.width / canvasConfigs.value.ratio}px`,
 		height: `${canvasAttr.height / canvasConfigs.value.ratio}px`
@@ -80,7 +95,13 @@
 		height: 0
 	})
 	const handleClick = (event: MouseEvent) => {
-		console.log(event)
+		const offset = event.offsetX
+		const frameIndex = getSelectFrame(
+			props.start + offset,
+			props.scale,
+			props.step
+		)
+		emits('selectFrame', frameIndex)
 	}
 	// 画时间线
 	const updateTimeLine = () => {
@@ -108,6 +129,20 @@
 			updateTimeLine()
 		})
 	}
+
+	watch(canvasConfigs, updateTimeLine)
+	watch(props, updateTimeLine)
+	watch(
+		hideSubMenu,
+		() => {
+			setTimeout(() => {
+				setCanvasRect()
+			}, 300)
+		},
+		{
+			flush: 'post'
+		}
+	)
 
 	onMounted(() => {
 		setCanvasRect() // 初始化 canvas 大小

@@ -107,7 +107,7 @@ export const computedItemShowArea = (
 export const isVideo = (type: string) => type === 'video'
 
 // 封装 JSON 格式化，避免 error
-export const getJsonParse = (str: string) => {
+export const getJsonParse = (str: string): any => {
 	let res = ''
 	try {
 		res = JSON.parse(str)

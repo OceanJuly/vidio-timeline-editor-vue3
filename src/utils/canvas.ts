@@ -32,7 +32,7 @@ export const getGridPixel = (scale: number, frameCount: number) => {
 		// 1s 一格
 		trackWidth = trackWidth / 30
 	}
-	if (scale > 30) {
+	if (scale < 30) {
 		// 6s 一格
 		trackWidth = trackWidth / 6
 	}

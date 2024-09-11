@@ -52,6 +52,7 @@ declare module 'vue' {
     TransitionIcon: typeof import('./src/components/icons/TransitionIcon.vue')['default']
     TransitionItem: typeof import('./src/components/item/trackItem/template/TransitionItem.vue')['default']
     UndoIcon: typeof import('./src/components/icons/UndoIcon.vue')['default']
+    VideoFrame: typeof import('./src/components/item/trackItem/VideoFrame.vue')['default']
     VideoIcon: typeof import('./src/components/icons/VideoIcon.vue')['default']
     VideoItem: typeof import('./src/components/item/trackItem/template/VideoItem.vue')['default']
   }

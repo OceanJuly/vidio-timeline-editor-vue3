@@ -12,7 +12,7 @@ class FFManager {
 	readonly #ffmpeg: Record<string, any> = {}
 	#runTask = reactive<RunTask[]>([])
 	#running = ref(false)
-	#isLoaded = ref(false)
+	isLoaded = ref(false)
 	showLog = true
 	playTimeCache = new Map()
 	audioCache: string[] = []
@@ -67,7 +67,7 @@ class FFManager {
 		await this.loadFF()
 		this.initFileSystem()
 		this.runHook('afterInit')
-		this.#isLoaded.value = true
+		this.isLoaded.value = true
 	}
 	// 启动执行命令队列
 	private startRun() {

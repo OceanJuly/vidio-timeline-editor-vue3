@@ -125,7 +125,6 @@
 			}
 		})
 	})
-	console.log(showTrackList.value)
 
 	/* trackList module */
 	const trackList = ref()

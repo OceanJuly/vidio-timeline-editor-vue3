@@ -9,7 +9,7 @@
 			:limitSize="limitSize"
 			v-model:newHeight="page.trackHeight"
 		/>
-		<TrackControl v-model="store.trackScale" />
+		<TrackControl v-model="trackStateStore.trackScale" />
 		<TrackList />
 	</div>
 </template>
@@ -22,7 +22,7 @@
 	import { useTrackState } from '@/store/trackState'
 
 	const page = usePageState()
-	const store = useTrackState()
+	const trackStateStore = useTrackState()
 	const trackHeight = computed(() => ({
 		height: `${page.trackHeight}px`
 	}))

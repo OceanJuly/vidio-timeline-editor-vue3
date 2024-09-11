@@ -22,10 +22,12 @@
 </template>
 
 <script setup lang="ts">
-	import { PropType } from 'vue'
+	import type { PropType } from 'vue'
+	import { computed, inject, ref, watch } from 'vue'
 
 	import VideoIcon from '@/components/icons/VideoIcon.vue'
 	import type { VideoTractItem } from '@/types'
+	import FFManager from '@/utils/ffmpegManager.ts'
 
 	defineProps({
 		trackItem: {
@@ -38,6 +40,9 @@
 			}
 		}
 	})
+
+	const ffmpeg = inject('ffmpeg') as FFManager
+	console.log(ffmpeg)
 </script>
 
 <style scoped></style>

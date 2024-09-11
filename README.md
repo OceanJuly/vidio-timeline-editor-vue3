@@ -26,9 +26,10 @@ Vue 3 + FFmpeg 实现纯前端音视频编辑
 
 ### 如何引入`ffmpeg`
 在`package.json`的`devDependencies`加上：
-
-`"@ffmpeg/core": "^0.11.0"`
-
+```json
+"@ffmpeg/core": "^0.11.0"
+"@ffmpeg/ffmpeg": "^0.11.6",
+```
 再执行
 
 `pnpm i`

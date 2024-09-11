@@ -1,4 +1,5 @@
 import vue from '@vitejs/plugin-vue'
+import fs from 'fs'
 import path from 'path'
 import AutoImport from 'unplugin-auto-import/vite'
 import IconsResolver from 'unplugin-icons/resolver'
@@ -9,10 +10,16 @@ import { defineConfig } from 'vite'
 
 import VitePluginMock from './ViteUtil/VitePluginMock/vite-plugin-mock'
 
-const openSSl = process.env?.npm_lifecycle_event === 'dev-ssl'
+const OpenSSl = process.env?.npm_lifecycle_event === 'dev-ssl'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+	server: {
+		headers: {
+			'Cross-Origin-Opener-Policy': 'same-origin',
+			'Cross-Origin-Embedder-Policy': 'require-corp'
+		}
+	},
 	plugins: [
 		vue(),
 		AutoImport({

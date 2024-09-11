@@ -22,3 +22,16 @@ Vue 3 + FFmpeg 实现纯前端音视频编辑
   - 调用队列封装，支持并发运行run
   - gif抽帧、视频抽帧、视频裁切、音视频分离、文件下载
   - 音频裁切、多音频合成、音频波形
+
+
+### 如何引入`ffmpeg`
+在`package.json`的`devDependencies`加上：
+
+`"@ffmpeg/core": "^0.11.0"`
+
+再执行
+
+`pnpm i`
+
+在`node_modules`查找`@ffmpeg`文件夹，复制这三个文件到`pubilc`
+![](https://github.com/OceanJuly/vidio-timeline-editor-vue3/tree/master/public/guide/ffmpeg_pos.png)

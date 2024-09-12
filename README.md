@@ -35,4 +35,4 @@ Vue 3 + FFmpeg 实现纯前端音视频编辑
 `pnpm i`
 
 在`node_modules`查找`@ffmpeg`文件夹，复制这三个文件到`pubilc`
-![](https://github.com/OceanJuly/vidio-timeline-editor-vue3/tree/master/public/guide/ffmpeg_pos.png)
+![guide_pic](https://github.com/OceanJuly/vidio-timeline-editor-vue3/blob/master/public/guide/ffmpeg_pos.png)

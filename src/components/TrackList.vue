@@ -64,6 +64,12 @@
 						/>
 					</template>
 				</div>
+				<TrackPlayPoint v-show="showTrackList.length !== 0" />
+				<div
+					v-show="showTrackList.length !== 0 && dropItemLeft !== 0"
+					class="z-30 w-px absolute -top-5 bottom-0 bg-yellow-300 dark:bg-yellow-300"
+					:style="{ left: `${dropItemLeft}px` }"
+				/>
 			</div>
 		</div>
 	</div>
@@ -75,6 +81,7 @@
 
 	import { TrackLine } from '@/components'
 	import VideoIcon from '@/components/icons/VideoIcon.vue'
+	import { TrackPlayPoint } from '@/components/item'
 	import { TimeLine, TrackListIcon } from '@/components/item/trackItem'
 	import { usePlayerState } from '@/store/playerState.ts'
 	import { useTrackState } from '@/store/trackState.ts'

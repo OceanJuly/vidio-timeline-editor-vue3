@@ -9,6 +9,11 @@
 		@click="setSelectTract"
 	>
 		<!-- 操作手柄 -->
+		<TrackHandler
+			:is-active="isActive"
+			:line-index="lineIndex"
+			:item-index="itemIndex"
+		/>
 		<!-- 容器 -->
 		<component :is="componentMap.get(trackItem.type)" :trackItem="trackItem" />
 	</div>
@@ -17,6 +22,7 @@
 <script setup lang="ts">
 	import { computed } from 'vue'
 
+	import { TrackHandler } from '@/components'
 	import {
 		AudioItem,
 		EffectItem,

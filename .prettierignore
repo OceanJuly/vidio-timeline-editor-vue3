@@ -1,0 +1,4 @@
+# Ignore all files except those in the src directory
+/*
+!src/
+!**/*.ts

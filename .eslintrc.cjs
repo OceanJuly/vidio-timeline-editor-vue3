@@ -32,10 +32,13 @@ module.exports = {
     // 'viteUtil/vitePluginMock/vite-plugin-mock.ts',
     'public/',
     'auto-imports.d.ts',
-    'components.d.ts'
+    'components.d.ts',
+    "node_modules/*"
   ],
   rules: {
-    'linebreak-style': ['error', 'unix'], // 缩进风格
+    'prettier/prettier': 'off',
+    // 'linebreak-style': ['error', 'unix'], // 缩进风格
+    'linebreak-style': "off", // 不检查 linebreak-style，兼容 webstorm 和 vscode
     'no-constant-condition': 'error', // 允许条件中的常量表达式。 if(true) 无意义
     'no-undef': 'error', // 对未声明变量的任何引用都会导致警告, 应该逐个检查，不应该全局关闭
     'no-fallthrough': 'error', // case中没有break的场景不应该全局关闭，特例单独处理
@@ -77,7 +80,7 @@ module.exports = {
     'consistent-return': 'error', // 要求使用一致的 return 语句
     'consistent-this': ['error', 'that'], // that 只能用来承接this
     'curly': ['off', 'all'], // if, else 必须写大括号
-    'default-case': 'error', // Switch 语句中必须有 Default 分支
+    'default-case': 'off', // Switch 语句中必须有 Default 分支
     'default-case-last': 'error', // Switch 语句中的 Default 必须位于最后
     'default-param-last': 'off', // 函数中存在默认值的参数必须在最后，更规范的函数写法
     'dot-notation': 'error', // 能用.连接符取值时，优先使用.
@@ -196,7 +199,7 @@ module.exports = {
     'array-bracket-newline': 'off', // 在数组开括号后和闭括号前强制换行
     'array-bracket-spacing': 'error', // 禁止在括号内使用空格，1.有空格var arr = [ 'foo', 'bar' ]; 2.无空格 var arr = ['foo', 'bar', 'baz'];
     'array-element-newline': 'off', // 数组元素换行风格
-    'arrow-parens': ['error', 'as-needed', { requireForBlockBody: false }], // 要求箭头函数的参数使用圆括号
+    'arrow-parens': ['off'], // 要求箭头函数的参数使用圆括号，去除：9.0.0版本去掉这个检查了
     'arrow-spacing': ['error', { // 箭头函数的箭头之前或之后有空格
       before: true,
       after: true
@@ -217,7 +220,7 @@ module.exports = {
     'func-call-spacing': 'off', // 要求或禁止在函数标识符和其调用之间有空格
     'function-call-argument-newline': 'off', // 不强制要求函数调用参数换行
     'generator-star-spacing': ['error', { before: true, after: false }], // 强制 generator 函数中 * 号前面有空格
-    'implicit-arrow-linebreak': 'error', // 强制隐式返回的箭头函数体的位置需在同一行
+    'implicit-arrow-linebreak': 'off', // 强制隐式返回的箭头函数体的位置需在同一行
     'indent': ['off', 2],
     'jsx-quotes': ['error', 'prefer-single'], // JSX 属性中使用一致的单引号
     'key-spacing': ['error', { // 对象文字属性中的键和值之间保持一致的间距
@@ -244,31 +247,37 @@ module.exports = {
     'newline-per-chained-call': ['error', { ignoreChainWithDepth: 2 }], // 链式操作最大个数
     'no-extra-parens': ['off', 'functions'], // 禁止extends冗余的括号
     'no-multi-spaces': 'error', // 禁止出现多个空格
-    'no-multiple-empty-lines': ['error', { // 不允许多个空行
-      max: 1, // 强制最大连续空行数。
-      maxEOF: 1, // 强制文件末尾的最大连续空行数
-      maxBOF: 0 //  强制文件开始的最大连续空行数
-    }],
+    // 'no-multiple-empty-lines': ['error', { // 不允许多个空行
+    //   max: 1, // 强制最大连续空行数。
+    //   maxEOF: 1, // 强制文件末尾的最大连续空行数
+    //   maxBOF: 0 //  强制文件开始的最大连续空行数
+    // }],
+    'no-multiple-empty-lines': 'off',
+    // 'nonblock-statement-body-position': ['error', 'beside'], // 不强制单行语句在同一行
+    'nonblock-statement-body-position': 'off', // 不强制单行语句在同一行
     'no-trailing-spaces': 'off', // 不检查行尾空白
     'no-whitespace-before-property': 'error', // 禁止属性前有空白
-    'nonblock-statement-body-position': ['error', 'beside'], // 强制单行语句在同一行
     'object-curly-spacing': ['error', 'always', { // 强制在花括号中使用一致的空格 always要求花括号内有空格 (除了 {})
       objectsInObjects: false
     }],
     'object-property-newline': 'off', // 对象属性强制换行
-    'operator-linebreak': ['error', 'before'], // 运算符强制执行一致的换行样式, 在操作符之前放置换行符
+    'operator-linebreak': ['error', 'after',  { "overrides": { "?": "before", ":": "before" } }], // 运算符强制执行一致的换行样式, 在操作符之前放置换行符，三元表达符应该在前面
     'padded-blocks': ['error', 'never'], // 禁止块语句和类的开始或末尾有空行
     'quotes': ['error', 'single', { // 强制一致地使用反引号、双引号或单引号
       avoidEscape: true, // 允许字符串使用单引号或双引号，只要字符串中包含了一个其它引号，否则需要转义
       allowTemplateLiterals: true //  允许字符串使用反勾号
     }],
     'rest-spread-spacing': ['error', 'never'], // 展开运算符后面不允许跟空格： ... args
-    'semi': ['error', 'always'], // 分号检查
-    // 'semi': 'off', // 不检查分号
+    // 'semi': ['error', 'always'], // 分号检查
+    'semi': 'off', // 不检查分号
     'semi-spacing': 'error', // 强制分号后有空格
-    'semi-style': ['error', 'last'], // 强制分号的位置在末尾
+    'semi-style': ['error', 'first'], // 强制分号的位置在末尾
     'space-before-blocks': ['error', 'always'], // 要求语句块之前的空格
-    'space-before-function-paren': ['error', 'never'], // 禁止函数圆括号之前有一个空格
+    'space-before-function-paren': ['error', {
+      "anonymous": "always",
+      "named": "never",
+      "asyncArrow": "always"
+    }], // 禁止函数圆括号之前有一个空格
     'space-in-parens': ['error', 'never'], // 禁止括号内的空格 foo('bar');
     'space-infix-ops': 'error', // 要求操作符周围有空格
     'space-unary-ops': ['error', { // 要求或禁止在一元操作符之前或之后存在空格
@@ -287,10 +296,11 @@ module.exports = {
     'vue/match-component-import-name': 'error', // 要求注册的组件名称与导入的组件名称匹配
     // "vue/no-restricted-html-elements": ["error", "button", "marquee"],// 禁用的html元素
     'vue/prefer-prop-type-boolean-first': 'error', // 强制Boolean在prop类型定义中排在第一位
-    'vue/html-closing-bracket-newline': ['error', {
-      singleline: 'never',
-      multiline: 'always'
-    }], // 在标签的右括号之前要求或禁止换行
+    // 'vue/html-closing-bracket-newline': ['error', {
+    //   singleline: 'never',
+    //   multiline: 'always'
+    // }], // 在标签的右括号之前要求或禁止换行
+    'vue/html-closing-bracket-newline': 'off', // 解决 prettierrc 冲突
     'vue/component-tags-order': ['error', {
       order: ['template', 'script', 'style']
     }], // vue单文件属性顺序
@@ -303,12 +313,20 @@ module.exports = {
     'vue/html-end-tags': 'error', // 要对标签进行关闭操作
     'vue/html-indent': 'off', // html内遵守缩进
     'vue/html-quotes': 'error', // html内部使用双引号
-    'vue/html-self-closing': 'error', // 优先使用自闭合标签
+    'vue/html-self-closing': [1, {
+      'html': {
+        'void': 'always',
+        'normal': 'always',
+        'component': 'always'
+      },
+      'svg': 'always',
+      'math': 'always'
+    }], // 优先使用自闭合标签
     'vue/max-attributes-per-line': ['error', { // 限制每行允许的最多属性数量
       singleline: 5, // 开始标记在一行中时，每行的最大属性数
       multiline: 5
     }],
-    'vue/multiline-html-element-content-newline': 'error', // 多行元素的内容之前和之后强制换行
+    'vue/multiline-html-element-content-newline': 'off', // 多行元素的内容之前和之后强制换行
     'vue/mustache-interpolation-spacing': 'error', // {{}} 插值时保持统一间距
     'vue/no-multi-spaces': 'error', // 不允许多个空格
     'vue/no-spaces-around-equal-signs-in-attribute': 'error', // 属性中的等号周围不允许有空格
@@ -513,9 +531,16 @@ module.exports = {
       allowTemplateLiterals: true //  允许字符串使用反勾号
     }],
     '@typescript-eslint/return-await': 'off', // 强制一致地返回等待的值
-    '@typescript-eslint/semi': ['error', 'always'], // 要求或禁止使用分号而不是 ASI
-    '@typescript-eslint/space-before-function-paren': ['error', 'never'], // 在函数括号之前强制保持一致的间距
-    '@typescript-eslint/space-infix-ops': 'error' // 此规则旨在确保中缀运算符周围有空格。
+    // '@typescript-eslint/semi': ['error', 'always'], // 要求或禁止使用分号而不是 ASI
+    '@typescript-eslint/semi': "off", // 要求或禁止使用分号而不是 ASI
+    '@typescript-eslint/space-before-function-paren': ['error', {
+      "anonymous": "always",
+      "named": "never",
+      "asyncArrow": "always"
+    }], // 在函数括号之前强制保持一致的间距
+    '@typescript-eslint/space-infix-ops': 'error', // 此规则旨在确保中缀运算符周围有空格。
+    '@typescript-eslint/no-non-null-assertion': 'off', // 可以使用非空断言符号
+    '@typescript-eslint/no-extra-semi': 'off' // 解决和 prettierrc 冲突
 
     // 以下内容待梳理
     // '@typescript-eslint/array-type', // 需要使用T[]或者Array<T>用于数组

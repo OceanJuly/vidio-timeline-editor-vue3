@@ -8,8 +8,9 @@ const installIcon = {
     })
     for (const path in moduleRouterList) {
       const name = path.match(/(?<=\/)(\w+)(?=\.vue)/) || []
+      if (!name) return
       app.component(
-        name[0]!,
+        name[0],
         (moduleRouterList[path] as { default: Component }).default
       )
     }

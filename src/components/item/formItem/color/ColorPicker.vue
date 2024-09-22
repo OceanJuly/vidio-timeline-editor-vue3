@@ -10,7 +10,7 @@
       </div>
     </template>
     <template #default>
-      <Sketch v-model="colors as any" :preset-colors="defaultColors" />
+      <Sketch v-model="colors" :preset-colors="defaultColors" />
     </template>
   </el-popover>
 </template>

@@ -25,7 +25,7 @@ function VitePluginMock() {
 			const filePath = 'ViteUtil/VitePluginMock/getData.js'
 			const urlPath = '/mock/getData'
 			vm.runInContext(fs.readFileSync(filePath, 'utf-8'), context)
-			console.log('****注册接口: ' + urlPath)
+			console.log(`注册接口: ${urlPath}`)
 			server.middlewares.use(urlPath, context.handler)
 		}
 	}
